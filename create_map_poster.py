@@ -955,6 +955,13 @@ Examples:
         choices=["png", "svg", "pdf"],
         help="Output format for the poster (default: png)",
     )
+    parser.add_argument(
+        "--output",
+        "-o",
+        type=str,
+        default="posters",
+        help="Path to output directory for the poster (default: posters)"
+    )
 
     args = parser.parse_args()
 
@@ -985,6 +992,10 @@ Examples:
             f"⚠ Height {args.height} exceeds the maximum allowed limit of 20. It's enforced as max limit 20."
         )
         args.height = 20.0
+
+    # Change output directory
+    if args.output:
+        POSTERS_DIR = args.output
 
     available_themes = get_available_themes()
     if not available_themes:
